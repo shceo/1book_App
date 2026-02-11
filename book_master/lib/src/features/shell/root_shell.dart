@@ -26,40 +26,44 @@ class _RootShellState extends State<RootShell> {
       SettingsScreen(),
     ];
 
-    return Stack(
-      children: [
-        const LiquidBackground(),
-        SafeArea(
-          child: IndexedStack(index: index, children: pages),
-        ),
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          const LiquidBackground(),
+          SafeArea(
+            child: IndexedStack(index: index, children: pages),
+          ),
 
-        // Floating glass navbar
-        Positioned(
-          left: 16,
-          right: 16,
-          bottom: 16,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(26),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
-              child: GlassBottomNav(
-                index: index,
-                items: [
-                  GlassNavItem(
-                    icon: Icons.home_rounded,
-                    label: t.t('home_title'),
-                  ),
-                  GlassNavItem(
-                    icon: Icons.tune_rounded,
-                    label: t.t('settings_title'),
-                  ),
-                ],
-                onChanged: (i) => setState(() => index = i),
+          // Floating glass navbar
+          Positioned(
+            left: 16,
+            right: 16,
+            bottom: 16,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(26),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 22, sigmaY: 22),
+                child: GlassBottomNav(
+                  index: index,
+                  items: [
+                    GlassNavItem(
+                      icon: Icons.home_rounded,
+                      label: t.t('home_title'),
+                    ),
+                    GlassNavItem(
+                      icon: Icons.tune_rounded,
+                      label: t.t('settings_title'),
+                    ),
+                  ],
+                  onChanged: (i) => setState(() => index = i),
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
