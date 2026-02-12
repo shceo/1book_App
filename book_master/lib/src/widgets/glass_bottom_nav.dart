@@ -34,9 +34,7 @@ class GlassBottomNav extends StatelessWidget {
           final item = items[i];
 
           return Expanded(
-            child: GestureDetector(
-              onTap: () => onChanged(i),
-              behavior: HitTestBehavior.opaque,
+            child: SizedBox.expand(
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 180),
                 curve: Curves.easeOut,
@@ -45,30 +43,39 @@ class GlassBottomNav extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   color: selected ? Colors.white.withValues(alpha: 0.14) : Colors.transparent,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      item.icon,
-                      size: 22,
-                      color: selected ? Colors.white : Colors.white.withValues(alpha: 0.72),
-                    ),
-                    const SizedBox(width: 8),
-                    Flexible(
-                      child: AnimatedDefaultTextStyle(
-                        duration: const Duration(milliseconds: 180),
-                        style: TextStyle(
-                          fontWeight: FontWeight.w800,
-                          fontSize: 13,
-                          color: selected ? Colors.white : Colors.white.withValues(alpha: 0.70),
+                child: Material(
+                  type: MaterialType.transparency,
+                  child: InkWell(
+                    onTap: () => onChanged(i),
+                    borderRadius: BorderRadius.circular(20),
+                    splashColor: Colors.white.withValues(alpha: 0.20),
+                    highlightColor: Colors.white.withValues(alpha: 0.08),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          item.icon,
+                          size: 22,
+                          color: selected ? Colors.white : Colors.white.withValues(alpha: 0.72),
                         ),
-                        child: Text(
-                          item.label,
-                          overflow: TextOverflow.ellipsis,
+                        const SizedBox(width: 8),
+                        Flexible(
+                          child: AnimatedDefaultTextStyle(
+                            duration: const Duration(milliseconds: 180),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 13,
+                              color: selected ? Colors.white : Colors.white.withValues(alpha: 0.70),
+                            ),
+                            child: Text(
+                              item.label,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
