@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:liquid_glass_mvvm/src/features/ar/ar_screen.dart';
 
 import '../../app/localization/app_localizations.dart';
 import '../../core/vm/vm_provider.dart';
@@ -40,7 +41,8 @@ class HomeScreen extends StatelessWidget {
                       TextField(
                         onChanged: vm.setCode,
                         textInputAction: TextInputAction.done,
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w700),
                         decoration: InputDecoration(
                           hintText: t.t('enter_code_hint'),
                           prefixIcon: const Icon(Icons.qr_code_2_rounded),
@@ -51,11 +53,10 @@ class HomeScreen extends StatelessWidget {
                         text: t.t('continue_btn'),
                         enabled: vm.canContinue,
                         onTap: () {
-                          // Пока заглушка под будущий AR-экран
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('CODE: ${vm.code.trim()}'),
-                              duration: const Duration(seconds: 1),
+                          final code = vm.code.trim();
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => ArScreen(code: code),
                             ),
                           );
                         },
